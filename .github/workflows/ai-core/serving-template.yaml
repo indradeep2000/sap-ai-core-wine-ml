@@ -1,0 +1,39 @@
+apiVersion: ai.sap.com/v1alpha1
+kind: ServingTemplate
+
+metadata:
+  name: wine-ml-inference
+  annotations:
+    scenarios.ai.sap.com/description: "Wine classification model using sklearn Random Forest"
+    scenarios.ai.sap.com/name: "Wine ML Scenario"
+    executables.ai.sap.com/description: "Serve Wine ML inference API using Flask and Gunicorn"
+    executables.ai.sap.com/name: "Wine ML Inference"
+  labels:
+    scenarios.ai.sap.com/id: "wine-ml-scenario"
+    ai.sap.com/version: "1.0.0"
+
+spec:
+  inputs:
+    parameters: []
+
+  template:
+    apiVersion: "serving.kserve.io/v1beta1"
+
+    metadata:
+      annotations: |
+        autoscaling.knative.dev/metric: concurrency
+        autoscaling.knative.dev/target: 1
+        autoscaling.knative.dev/targetBurstCapacity: 0
+      labels: |
+        ai.sap.com/resourcePlan: starter
+
+    spec: |
+      predictor:
+        minReplicas: 1
+        maxReplicas: 1
+        containers:
+        - name: kserve-container
+          image: indradeep2000/sap-ai-core-wine-ml:latest
+          ports:
+          - containerPort: 8080
+            protocol: TCP
