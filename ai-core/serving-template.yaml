@@ -4,10 +4,10 @@ kind: ServingTemplate
 metadata:
   name: wine-ml-inference
   annotations:
-    scenarios.ai.sap.com/description: "Wine classification model using sklearn Random Forest"
-    scenarios.ai.sap.com/name: "Wine ML Scenario"
-    executables.ai.sap.com/description: "Serve Wine ML inference API using Flask and Gunicorn"
-    executables.ai.sap.com/name: "Wine ML Inference"
+    scenarios.ai.sap.com/description: "wine-ml-scenario-description"
+    scenarios.ai.sap.com/name: "wine-ml-scenario"
+    executables.ai.sap.com/description: "wine-ml-inference-executable"
+    executables.ai.sap.com/name: "wine-ml-inference"
   labels:
     scenarios.ai.sap.com/id: "wine-ml-scenario"
     ai.sap.com/version: "1.0.0"
